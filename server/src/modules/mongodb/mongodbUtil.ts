@@ -70,9 +70,9 @@ export default class MongodbUtil {
      * @param options 
      */
     public async insertMany(model: Model, contents: any[], options?: any): Promise<ModelAny> {
-        return new Promise(resolve => {
+        return new Promise(async resolve => {
             options = options ? options : {};
-            model.insertMany(contents, options);
+            await model.insertMany(contents, options);
             let dt: ModelAny = {};
             dt.code = 200;
             resolve(dt);

@@ -27,7 +27,7 @@ class ContentsApi {
                 userId: data.userId,
                 uName: uDt.msg.name,
                 content: data.content,
-                time: new Date(),
+                time: new Date().getTime() + "",
             }
             let dt: ModelAny = { code: 200, msg: reDate };
             socket.sendMsg(Router.rut_chat, dt);

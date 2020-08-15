@@ -9,7 +9,7 @@ export interface ContentsModule {
     uName: string,
     fName: string,
     content: string,
-    time?: Date,
+    time?: string,
 }
 
 export default class ContentScheme {
@@ -30,7 +30,7 @@ export default class ContentScheme {
             uName: { type: String, required: true },
             fName: { type: String, required: true },
             content: String,
-            time: { type: Date, default: new Date() },
+            time: { type: String, default: new Date().getTime() + "" },
         }, { versionKey: false });
 
         this.model = Mongoose.model('contents', contentSchema);
@@ -38,6 +38,7 @@ export default class ContentScheme {
     }
 
     async insertOne(data: ContentsModule): Promise<any> {
+        data.time = new Date().getTime() + "";
         await MongodbUtil.Inst.insertMany(this.model, [data]);
     }
 

@@ -45,7 +45,7 @@ export interface ChatRes {
     userId: number,
     uName: number,
     content: string,
-    time: Date,
+    time: string,
 }
 
 /**
