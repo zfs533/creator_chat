@@ -1,3 +1,6 @@
+import { getAvatar } from "../net/util";
+import { user } from "../user/user";
+
 const { ccclass, property } = cc._decorator;
 @ccclass
 export default class ChatItem extends cc.Component {
@@ -44,6 +47,7 @@ export default class ChatItem extends cc.Component {
     }
 
     async setInfo(data: any, isMe: boolean) {
+        console.log(`${isMe} ${data.friendId} ${data.userId}`)
         return new Promise(resolve => {
             if (isMe) {
                 this.iconLeft.active = false;
@@ -53,7 +57,8 @@ export default class ChatItem extends cc.Component {
                 this.labelRight.string = data.content;
                 this.labelRight._forceUpdateRenderData(true);
                 this.qiPaoRight.height = this.labelRight.node.height + 5;
-                this.selfNode.height = this.qiPaoRight.height + 10;
+                this.selfNode.height = this.qiPaoRight.height + 10 + 30;
+                this.iconRight.getComponent(cc.Sprite).spriteFrame = getAvatar(user.data.pid);
             }
             else {
                 this.iconRight.active = false;
@@ -64,7 +69,8 @@ export default class ChatItem extends cc.Component {
                 this.labelLeft.string = data.content;
                 this.labelLeft._forceUpdateRenderData(true);
                 this.qiPaoLeft.height = this.labelLeft.node.height + 5;
-                this.selfNode.height = this.qiPaoLeft.height + 10;
+                this.selfNode.height = this.qiPaoLeft.height + 10 + 30;
+                this.iconLeft.getComponent(cc.Sprite).spriteFrame = getAvatar(data.userId);
             }
             resolve();
         });

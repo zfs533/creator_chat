@@ -32,11 +32,11 @@ export default class ScrollContent extends cc.Component {
 
     addtest() {
         // test
-        for (let i = 0; i < 20; i++) {
-            let str = "testtesttest交电费卡交电交电费卡交电交电费卡交电";
-            this.addItem(str.substring(0, Math.floor(Math.random() * str.length)), false);
-            this.addItem(str.substring(0, Math.floor(Math.random() * str.length)), true);
-        }
+        // for (let i = 0; i < 20; i++) {
+        //     let str = "testtesttest交电费卡交电交电费卡交电交电费卡交电";
+        //     this.addItem(str.substring(0, Math.floor(Math.random() * str.length)), false);
+        //     this.addItem(str.substring(0, Math.floor(Math.random() * str.length)), true);
+        // }
     }
 
     /**
@@ -48,19 +48,20 @@ export default class ScrollContent extends cc.Component {
         this.loading.hideLoading();
         let dt: ChatRes = data.msg;
         if (dt.userId != user.data.pid) {
-            this.addItem(dt.content, false);
+            this.addItem(dt, false);
         }
     }
 
-    async addItem(content: string, isMe: boolean) {
+    async addItem(data: any, isMe: boolean) {
         let item: cc.Node = NodePool.Instance.getNode(NodePool.CtItem);
         if (!item) {
             item = cc.instantiate(this.chatItem);
         }
         let script: ChatItem = item.getComponent(ChatItem);
-        await script.setInfo({ content: content }, isMe);
+        await script.setInfo({ content: data.content, userId: data.userId, friendId: data.friendId }, isMe);
         this.content.addChild(item);
         this.itemlist.push(item);
+        this.scrolView.scrollToBottom(0.2);
     }
 
     /**
@@ -69,14 +70,17 @@ export default class ScrollContent extends cc.Component {
      */
     handleChatHistory(data: ModelAny) {
         let list: ContentsModule[] = data.msg;
-        list.sort((a, b) => { return (new Date(a.time)).getTime() - (new Date(b.time)).getTime() });
+        console.log(list);
+        // list.sort((a, b) => { return (new Date(a.time)).getTime() - (new Date(b.time)).getTime() });
+        list.sort((a, b) => { return (Number(a.time)) - (Number(b.time)) });
+        console.log(list);
         this.clearling();
         for (let i = 0; i < list.length; i++) {
             if (list[i].userId == user.data.pid) {
-                this.addItem(list[i].content, true);
+                this.addItem(list[i], true);
             }
             else {
-                this.addItem(list[i].content, false);
+                this.addItem(list[i], false);
             }
         }
     }

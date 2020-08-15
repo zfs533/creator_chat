@@ -1,6 +1,6 @@
 const { ccclass, property } = cc._decorator;
 @ccclass
-export default class LhjItem extends cc.Component {
+export default class Main extends cc.Component {
     onLoad() {
         this.initProperty();
     }

@@ -24,15 +24,19 @@ export default class Bottom extends cc.Component {
     public friendPid: number = 0;
 
     sendContent(): void {
+        let date = new Date();
+        let time = date.getFullYear() + ":" + (date.getMonth() + 1) + ":" + date.getDate() + "-" + date.getHours() + ":" + date.getMinutes() + ":" + date.getSeconds();
+        let str = time + "::=>" + this.editbox.string;
 
         let dt: ChatReq = {
             userId: user.data.pid,
             friendId: this.friendPid,
-            content: this.editbox.string,
+            content: str,
         }
-        let content = this.editbox.string;
-        this.scrollContent.addItem(content, true);
+        let content = str;
+        this.scrollContent.addItem(dt, true);
         Net.sendMsg(dt, Router.rut_chat);
+        this.editbox.string = "";
         this.loading.showLoading();
     }
 }

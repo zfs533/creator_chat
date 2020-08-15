@@ -1,11 +1,11 @@
 import { userMgr } from "./userMgr";
-import UserNode from "../user/userNode";
 import ChatNode from "../chat/chatNode";
 import { UserModule, HistoryReq } from "../net/globalUtils";
 import { user } from "./user";
 import { tips } from "../common/tip";
 import { Net } from "../net/net";
 import { Router } from "../net/routers";
+import { getAvatar } from "../net/util";
 
 const { ccclass, property } = cc._decorator;
 @ccclass
@@ -16,6 +16,9 @@ export default class UserItem extends cc.Component {
 
     @property(cc.Label)
     lbcontent: cc.Label = null;
+
+    @property(cc.Sprite)
+    head: cc.Sprite = null;
 
     public chatNode: ChatNode;
     private data: UserModule;
@@ -34,6 +37,7 @@ export default class UserItem extends cc.Component {
 
         this.userName.string = data.name;
         this.lbcontent.string = ""
+        this.head.spriteFrame = getAvatar(data.pid);
     }
 
     handleTouch() {
