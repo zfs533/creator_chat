@@ -30,10 +30,7 @@ export default class Login extends cc.Component {
     }
 
     start() {
-        this.loading.showLoading();
-        Net.init(() => {
-            this.loading.hideLoading();
-        });
+
     }
 
     handLogin() {

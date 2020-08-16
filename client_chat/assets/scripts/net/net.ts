@@ -12,8 +12,10 @@ export default class ChatNet {
         this.socket = new WebSocket("ws://139.199.80.239:8089/ws");//remote
         this.socket.binaryType = "arraybuffer";
         this.socket.onopen = () => {
-            if (cb) { cb() }
-            console.log("--------connect success---------");
+            if (cb) {
+                console.log("--------connect success---------");
+                cb()
+            }
         };
         this.socket.close = () => { console.log("close") };
         this.socket.onerror = () => { console.log("onerror") };
