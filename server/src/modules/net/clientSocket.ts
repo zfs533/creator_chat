@@ -1,5 +1,5 @@
 import ClientManager from "../common/clientManager";
-import { Head, LoginRes, ChatReq, HistoryReq } from "../utils/globalUtils";
+import { Head, LoginRes, ChatReq, HistoryReq, ReqGroups } from "../utils/globalUtils";
 import DataViewUtils from "../utils/dataviewUtils";
 import Logger from "../utils/logger";
 import { Router } from "../controller/routers";
@@ -11,6 +11,7 @@ import EventManager from "../common/EventManager";
 import FriendScheme from "../mongodb/module/friendsDao";
 import { friendApi } from "../controller/friendApi";
 import UserScheme from "../mongodb/module/userDao";
+import { groupsApi } from "../controller/groupsApi";
 
 /* 客户端连接socket类 */
 export default class ClientSocket {
@@ -114,6 +115,15 @@ export default class ClientSocket {
             case Router.rut_friend_list:
                 this.handleGetFriendList(data);
                 break;
+
+            case Router.rut_create_group:
+                this.handleCreateGroup(data);
+                break;
+
+            case Router.rut_group_list:
+                this.handleGroupList(data)
+                break;
+
         }
     }
 
@@ -133,7 +143,8 @@ export default class ClientSocket {
             Logger.info(2, userInfo);
             let userList = await loginApi.getUserList();
             let friendList = await FriendScheme.Inst.getFriendList(loginData.msg.pid);
-            let lRes: LoginRes = { user: userInfo.msg, list: userList.msg, fList: friendList.msg };
+            let groupList = await groupsApi.getGroupList();
+            let lRes: LoginRes = { user: userInfo.msg, list: userList.msg, fList: friendList.msg, gList: groupList.msg };
             reData.msg = lRes;
         }
         Logger.info(JSON.stringify(reData));
@@ -162,18 +173,21 @@ export default class ClientSocket {
             let userInfo = await loginApi.getUserInfo(loginData1.msg.pid)
             let userList = await loginApi.getUserList();
             let friendList = await FriendScheme.Inst.getFriendList(loginData1.msg.pid);
-            let lRes: LoginRes = { user: userInfo.msg, list: userList.msg, fList: friendList.msg };
+            let groupList = await groupsApi.getGroupList();
+            let lRes: LoginRes = { user: userInfo.msg, list: userList.msg, fList: friendList.msg, gList: groupList.msg };
             reData1.msg = lRes;
         }
         this.sendMsg(Router.rut_register, reData1)
     }
 
-    private handleChat(data: any) {
+    private handleChat(data: ChatReq) {
         /* 向数据库中写入数据 */
         let dt: ChatReq = {
             userId: data.userId,
             friendId: data.friendId,
             content: data.content,
+            isGroup: data.isGroup,
+            groupId: data.groupId,
         }
         /* 将信息发送给对方 */
         contentApi.handleChat(dt);
@@ -182,10 +196,12 @@ export default class ClientSocket {
         this.sendMsg(Router.rut_chat, redt);
     }
 
-    private async handleHistory(data: any) {
+    private async handleHistory(data: HistoryReq) {
         let hisDt: HistoryReq = {
-            userId: data.userId,
-            friendId: data.friendId,
+            userId: data.userId || 0,
+            friendId: data.friendId || 0,
+            isGroup: data.isGroup,
+            groupId: data.groupId,
         }
         let dt: ModelAny = await contentApi.getHistoryRecord(hisDt);
         this.sendMsg(Router.rut_chat_history, dt);
@@ -199,7 +215,7 @@ export default class ClientSocket {
 
     private async handleGetUserList(data: any) {
         let userList = await loginApi.getUserList();
-        let dt: ModelAny = { code: ErrEnum.OK, msg: userList }
+        let dt: ModelAny = { code: ErrEnum.OK, msg: userList.msg }
         this.sendMsg(Router.rut_user_list, dt);
     }
 
@@ -207,6 +223,27 @@ export default class ClientSocket {
         let friendList = await FriendScheme.Inst.getFriendList(data.pid);
         let dt: ModelAny = { code: ErrEnum.OK, msg: friendList }
         this.sendMsg(Router.rut_friend_list, dt);
+    }
+
+    /**
+     * 创建群组
+     * @param data 
+     */
+    private async handleCreateGroup(data: ReqGroups) {
+        let pid: number = await groupsApi.createGroups();
+        let curGroup = await groupsApi.getGroupByPid(pid);
+        let dt: ModelAny = { code: curGroup.code, msg: curGroup.msg };
+        this.sendMsg(Router.rut_create_group, dt);
+    }
+
+    /**
+     * 获取群列表
+     * @param data 
+     */
+    private async handleGroupList(data: ReqGroups) {
+        let groupList = await groupsApi.getGroupList();
+        let dt: ModelAny = { code: groupList.code, msg: groupList.msg };
+        this.sendMsg(Router.rut_group_list, dt);
     }
 }
 

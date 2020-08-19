@@ -13,4 +13,8 @@ export const Router = {
     rut_user_list: "1006",
     /* 好友列表 */
     rut_friend_list: "1007",
+    /* 新建群聊 */
+    rut_create_group: "1008",
+    /* 获取群列表 */
+    rut_group_list: "1009",
 }

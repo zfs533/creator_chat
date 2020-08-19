@@ -7,6 +7,7 @@ import Logger from "../utils/logger";
 import FriendScheme from "./module/friendsDao";
 import UserScheme from "./module/userDao";
 import ContentScheme from "./module/contentsDao";
+import GroupScheme from "./module/groupDao";
 
 export interface ModelAny {
     code?: number,
@@ -39,6 +40,7 @@ export default class MongodbUtil {
                     UserScheme.Inst.init();
                     FriendScheme.Inst.init();
                     ContentScheme.Inst.init();
+                    GroupScheme.Inst.init();
                     Logger.info("数据库连接成功:" + url);
                     resolve();
                 }

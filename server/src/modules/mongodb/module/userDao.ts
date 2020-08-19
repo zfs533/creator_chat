@@ -1,7 +1,7 @@
 let Mongoose = require('mongoose');
 import { Schema, Model } from 'mongoose';
 import MongodbUtil, { ModelAny } from '../mongodbUtil';
-import Logger from '../../utils/logger';
+import { getRandPid } from '../../utils/utils';
 
 export interface UserModule {
     pid?: number,
@@ -56,7 +56,7 @@ export default class UserScheme {
 
     public async insertOne(obj: UserModule): Promise<any> {
         return new Promise(async resolve => {
-            obj.pid = Math.floor(Math.random() * 100000);
+            obj.pid = getRandPid();
             await MongodbUtil.Inst.insertMany(this.model, [obj]);
             resolve();
         });

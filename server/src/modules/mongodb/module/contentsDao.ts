@@ -1,6 +1,7 @@
 let Mongoose = require('mongoose');
 import { Schema, Model } from 'mongoose';
 import MongodbUtil from '../mongodbUtil';
+import Logger from '../../utils/logger';
 
 
 export interface ContentsModule {
@@ -9,6 +10,8 @@ export interface ContentsModule {
     uName: string,
     fName: string,
     content: string,
+    isGroup: number,
+    groupId?: number,
     time?: string,
 }
 
@@ -30,6 +33,8 @@ export default class ContentScheme {
             uName: { type: String, required: true },
             fName: { type: String, required: true },
             content: String,
+            isGroup: { type: Number, default: 0 },
+            groupId: { type: Number, default: 0 },
             time: { type: String, default: new Date().getTime() + "" },
         }, { versionKey: false });
 
@@ -43,7 +48,12 @@ export default class ContentScheme {
     }
 
     async findMany(userId: number, friendId: number): Promise<any> {
-        let conditions: any = { "$or": [{ userId: userId, friendId: friendId }, { userId: friendId, friendId: userId }] }
+        let conditions: any = { "$or": [{ userId: userId, friendId: friendId, isGroup: 0 }, { userId: friendId, friendId: userId, isGroup: 0 }] }
+        return await MongodbUtil.Inst.findMany(this.model, conditions);
+    }
+    async findManyGroup(pid: Number): Promise<any> {
+        let conditions: any = { groupId: pid, isGroup: 1 }
+        Logger.info(conditions);
         return await MongodbUtil.Inst.findMany(this.model, conditions);
     }
 }

@@ -56,4 +56,18 @@ export default class ClientManager {
         return cs;
     }
 
+    /**
+     * 获取所有客户端
+     * @param pid 
+     */
+    public getAllClientSocket(pid: number): ClientSocket[] {
+        let list = [];
+        for (let i = 0; i < this._clientSockets.length; i++) {
+            if (this._clientSockets[i].pid != pid) {
+                list.push(this._clientSockets[i]);
+            }
+        }
+        return list;
+    }
+
 } 
