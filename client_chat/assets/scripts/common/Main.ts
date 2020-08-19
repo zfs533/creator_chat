@@ -25,8 +25,6 @@ export default class Main extends cc.Component {
         let id = pid;
         let head = this.headList[Math.floor(Math.random() * this.headList.length)];
         this.arr.push({ pid: id, head: head });
-        console.log("headarr");
-        console.log((this.arr))
         return head;
     }
 

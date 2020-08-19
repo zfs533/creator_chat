@@ -25,20 +25,29 @@ export default class ChatNode extends cc.Component {
 
     }
 
-    showUI(data: UserModule) {
-        this.data = data;
+    showUI(data?: UserModule) {
+        if (data) {
+            this.data = data;
+        }
         this.setInfo();
         cc.tween(this.node).to(0.3, { x: 0 }).start();
         cc.tween(this.userNode).to(0.3, { x: -650 }).start();
     }
 
     setInfo() {
-        this.fName.string = this.data.name;
-        this.botton.friendPid = this.data.pid;
+        if (this.botton.isGroup) {
+            this.fName.string = "群聊";
+        }
+        else {
+            this.fName.string = this.data.name;
+            this.botton.friendPid = this.data.pid;
+        }
     }
 
     hideNode() {
         cc.tween(this.node).to(0.3, { x: 650 }).start();
         cc.tween(this.userNode).to(0.3, { x: 0 }).start();
+        this.botton.isGroup = 0;
+        this.botton.groupId = 0;
     }
 }

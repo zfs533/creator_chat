@@ -1,6 +1,6 @@
 import { userMgr } from "./userMgr";
 import ChatNode from "../chat/chatNode";
-import { UserModule, HistoryReq } from "../net/globalUtils";
+import { UserModule, HistoryReq, GroupModule } from "../net/globalUtils";
 import { user } from "./user";
 import { tips } from "../common/tip";
 import { Net } from "../net/net";
@@ -9,7 +9,7 @@ import { getAvatar } from "../net/util";
 
 const { ccclass, property } = cc._decorator;
 @ccclass
-export default class UserItem extends cc.Component {
+export default class GroupItem extends cc.Component {
 
     @property(cc.Label)
     userName: cc.Label = null;
@@ -21,7 +21,7 @@ export default class UserItem extends cc.Component {
     head: cc.Sprite = null;
 
     public chatNode: ChatNode;
-    private data: UserModule;
+    private data: GroupModule;
 
     onLoad() {
         this.initProperty();
@@ -31,24 +31,22 @@ export default class UserItem extends cc.Component {
 
     }
 
-    setInfo(data: UserModule) {
+    setInfo(data: GroupModule) {
         this.data = data;
         userMgr.addToList(data);
 
-        this.userName.string = data.name;
+        this.userName.string = "Group:" + data.pid;
         this.lbcontent.string = ""
         this.head.spriteFrame = getAvatar(data.pid);
     }
 
     handleTouch() {
-        if (this.data.pid == user.data.pid) {
-            tips.showTip("不能和自己聊天");
-            return;
-        }
         /* 请求历史消息 */
-        let dt: HistoryReq = { userId: user.data.pid, friendId: this.data.pid, isGroup: 0, groupId: 0 }
+        let dt: HistoryReq = { isGroup: 1, groupId: this.data.pid }
         Net.sendMsg(dt, Router.rut_chat_history);
-        this.chatNode.botton.isGroup = 0;
-        this.chatNode.showUI(this.data);
+
+        this.chatNode.botton.isGroup = 1;
+        this.chatNode.botton.groupId = this.data.pid
+        this.chatNode.showUI();
     }
 }

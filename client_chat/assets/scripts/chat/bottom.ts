@@ -22,16 +22,26 @@ export default class Bottom extends cc.Component {
     loading: Loading = null;
 
     public friendPid: number = 0;
+    /* 是否为群聊  */
+    public isGroup: number = 0;
+    public groupId: number = 0;
 
     sendContent(): void {
         let date = new Date();
         let time = date.getFullYear() + ":" + (date.getMonth() + 1) + ":" + date.getDate() + "-" + date.getHours() + ":" + date.getMinutes() + ":" + date.getSeconds();
-        let str = time + "::=>" + this.editbox.string;
+        let str = "--------" + time + "--------\n" + this.editbox.string;
 
         let dt: ChatReq = {
             userId: user.data.pid,
-            friendId: this.friendPid,
             content: str,
+            isGroup: this.isGroup,
+            groupId: this.groupId,
+        }
+        if (this.isGroup > 0) {
+            dt.friendId = 0;
+        }
+        else {
+            dt.friendId = this.friendPid;
         }
         let content = str;
         this.scrollContent.addItem(dt, true);

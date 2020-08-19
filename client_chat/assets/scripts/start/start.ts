@@ -33,6 +33,7 @@ export default class Start extends cc.Component {
     }
 
     gotoChat() {
+        cc.log("gotoChat");
         cc.director.loadScene('chat');
     }
 

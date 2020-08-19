@@ -46,6 +46,10 @@ export interface ContentsModule {
     time?: Date,
 }
 
+export interface GroupModule {
+    pid: number,
+    time?: string
+}
 
 /**
  * 登录请求
@@ -62,6 +66,8 @@ export interface LoginRes {
     list: UserModule[],
     /* 好友列表 */
     fList: FriendsModule[],
+    /* 群组列表 */
+    gList: GroupModule[],
 }
 
 /**
@@ -71,9 +77,13 @@ export interface ChatReq {
     /* 玩家pid */
     userId: number,
     /* 好友pid */
-    friendId: number,
+    friendId?: number,
     /* 聊天内容 */
     content: string,
+    /* 是否为群聊消息 */
+    isGroup: number,
+    /* 群组pid */
+    groupId: number,
 }
 
 export interface ChatRes {
@@ -81,14 +91,17 @@ export interface ChatRes {
     uName: number,
     content: string,
     time: Date,
+    groupId: number,
 }
 
 /**
  * 历史聊天记录请求
  */
 export interface HistoryReq {
-    userId: number,
-    friendId: number,
+    groupId?: number,//群组pid
+    userId?: number,
+    friendId?: number,
+    isGroup: number,
 }
 
 /**
@@ -125,3 +138,11 @@ export interface getFriendListRes {
     userlist: FriendsModule[];
 }
 
+export interface ReqGroups {
+    pid: number,
+    time?: string
+}
+export interface ResGroups {
+    pid: number,
+    time?: string
+}

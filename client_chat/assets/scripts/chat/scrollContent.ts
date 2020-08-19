@@ -5,6 +5,8 @@ import { ModelAny, ChatRes, HistoryReq, ContentsModule } from "../net/globalUtil
 import Loading from "../common/loading";
 import { user } from "../user/user";
 import NodePool from "../common/nodePool";
+import Bottom from "./bottom";
+import ChatNode from "./chatNode";
 
 const { ccclass, property } = cc._decorator;
 @ccclass
@@ -21,6 +23,9 @@ export default class ScrollContent extends cc.Component {
 
     @property(cc.ScrollView)
     scrolView: cc.ScrollView = null;
+
+    @property(ChatNode)
+    chatNode: ChatNode = undefined;
 
     private itemlist: any[] = [];
 
@@ -47,8 +52,15 @@ export default class ScrollContent extends cc.Component {
         console.log(data);
         this.loading.hideLoading();
         let dt: ChatRes = data.msg;
-        if (dt.userId != user.data.pid) {
-            this.addItem(dt, false);
+        if (data.msg.groupId > 0) {
+            if (data.msg.groupId == this.chatNode.botton.groupId && dt.userId != user.data.pid) {
+                this.addItem(dt, false);
+            }
+        }
+        else {
+            if (dt.userId != user.data.pid) {
+                this.addItem(dt, false);
+            }
         }
     }
 
@@ -71,7 +83,6 @@ export default class ScrollContent extends cc.Component {
     handleChatHistory(data: ModelAny) {
         let list: ContentsModule[] = data.msg;
         console.log(list);
-        // list.sort((a, b) => { return (new Date(a.time)).getTime() - (new Date(b.time)).getTime() });
         list.sort((a, b) => { return (Number(a.time)) - (Number(b.time)) });
         console.log(list);
         this.clearling();
