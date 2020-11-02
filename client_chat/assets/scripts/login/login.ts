@@ -30,6 +30,14 @@ export default class Login extends cc.Component {
     }
 
     start() {
+        let name = cc.sys.localStorage.getItem("uname");
+        let pwd = cc.sys.localStorage.getItem("pwd");
+        if (name) {
+            this.edtName.string = name;
+        }
+        if (pwd) {
+            this.edtPwd.string = pwd;
+        }
 
     }
 
@@ -67,10 +75,16 @@ export default class Login extends cc.Component {
             tips.showTip(ErrEnum[String(data.code)]);
             return;
         }
+        this.saveLoginInfo(this.edtName.string, this.edtPwd.string);
         tips.showTip("登录成功");
         user.setInfo(data.msg);
         this.userNode.init();
         this.hideSelf();
+    }
+
+    saveLoginInfo(name: string, pwd: string) {
+        cc.sys.localStorage.setItem("uname", name);
+        cc.sys.localStorage.setItem("pwd", pwd);
     }
 
     resRegister(data: ModelAny) {
@@ -79,6 +93,7 @@ export default class Login extends cc.Component {
             tips.showTip(ErrEnum[String(data.code)]);
             return;
         }
+        this.saveLoginInfo(this.edtName.string, this.edtPwd.string);
         tips.showTip("注册成功");
         user.setInfo(data.msg);
         this.userNode.init();

@@ -72,8 +72,8 @@ module.exports = {
             if (err) throw err;
             Editor.success('Manifest successfully generated');
         });
-        delete manifest.assets;
-        delete manifest.searchPaths;
+        // delete manifest.assets;
+        // delete manifest.searchPaths;
         fs.writeFile(destVersion, JSON.stringify(manifest), (err) => {
             if (err) throw err;
             Editor.success('Version successfully generated');

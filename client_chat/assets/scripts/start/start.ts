@@ -41,13 +41,13 @@ export default class Start extends cc.Component {
      * 开始热更新
      */
     async startUpdate() {
-        if (cc.sys.isNative) {
-            this.updateNode.active = true;
-            await updateUtil.init();
-            await updateUtil.startUpdateTask(this.updateManifest);
-        }
-        else {
-            this.gotoChat();
-        }
+        // if (cc.sys.isNative) {
+        //     this.updateNode.active = true;
+        //     await updateUtil.init();
+        //     await updateUtil.startUpdateTask(this.updateManifest);
+        // }
+        // else {
+        this.gotoChat();
+        // }
     }
 }
