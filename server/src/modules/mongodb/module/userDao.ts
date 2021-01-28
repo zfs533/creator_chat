@@ -23,7 +23,7 @@ export default class UserScheme {
         return this._instance;
     }
 
-    public model: Model;
+    public model: Model<any>;
     public async init(): Promise<any> {
         //_id:Number
         let userSchema = new Schema({

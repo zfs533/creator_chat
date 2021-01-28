@@ -16,7 +16,7 @@ export default class GroupScheme {
         }
         return this._instance;
     }
-    public model: Model;
+    public model: Model<any>;
     public async init(): Promise<any> {
         let groupSchema = new Schema({
             pid: { type: Number, default: 0, index: true },

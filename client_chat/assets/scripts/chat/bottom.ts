@@ -49,4 +49,8 @@ export default class Bottom extends cc.Component {
         this.editbox.string = "";
         this.loading.showLoading();
     }
+
+    sendPhotos() {
+
+    }
 }

@@ -56,7 +56,7 @@ export default class MongodbUtil {
      * @param model 
      * @param name 
      */
-    public async createCollection(model: Model, name: string): Promise<any> {
+    public async createCollection(model: Model<any>, name: string): Promise<any> {
         return new Promise(resolve => {
             model.createCollection().then(function (collection) {
                 console.log(`Collection ${name} is created!`);
@@ -71,7 +71,7 @@ export default class MongodbUtil {
      * @param contents 
      * @param options 
      */
-    public async insertMany(model: Model, contents: any[], options?: any): Promise<ModelAny> {
+    public async insertMany(model: Model<any>, contents: any[], options?: any): Promise<ModelAny> {
         return new Promise(async resolve => {
             options = options ? options : {};
             await model.insertMany(contents, options);
@@ -87,7 +87,7 @@ export default class MongodbUtil {
      * @param conditions 查询条件
      * @param sort 排序
      */
-    public async findOne(model: Model, conditions: any, sort?: any): Promise<ModelAny> {
+    public async findOne(model: Model<any>, conditions: any, sort?: any): Promise<ModelAny> {
         return new Promise(resolve => {
             let data = model.findOne(conditions);
             data.exec((err, res) => {
@@ -103,7 +103,7 @@ export default class MongodbUtil {
      * @param conditions 查询条件
      * @param sort 排序
      */
-    public async findMany(model: Model, conditions: any, sort?: any): Promise<ModelAny> {
+    public async findMany(model: Model<any>, conditions: any, sort?: any): Promise<ModelAny> {
         return new Promise(resolve => {
             let data = model.find(conditions);
             data.exec((err, res) => {
@@ -118,7 +118,7 @@ export default class MongodbUtil {
      * @param model 表对象
      * @param coditions 查询条件
      */
-    public async deleteOne(model: Model, coditions: any): Promise<any> {
+    public async deleteOne(model: Model<any>, coditions: any): Promise<any> {
         return new Promise((resolve, reject) => {
             model.deleteOne(coditions);
             resolve();
@@ -130,7 +130,7 @@ export default class MongodbUtil {
      * @param model 表对象 
      * @param conditions 查询条件
      */
-    public async deleteMany(model: Model, conditions: any): Promise<any> {
+    public async deleteMany(model: Model<any>, conditions: any): Promise<any> {
         return new Promise(resolve => {
             model.deleteMany(conditions);
             resolve();

@@ -5,6 +5,15 @@ export default class Main extends cc.Component {
     @property([cc.SpriteFrame])
     headList: cc.SpriteFrame[] = [];
 
+    @property(cc.Node)
+    loginNode: cc.Node = undefined;
+
+    @property(cc.Node)
+    userNode: cc.Node = undefined;
+
+    @property(cc.Node)
+    chatNode: cc.Node = undefined;
+
     private arr: any[] = [];
     onLoad() {
         this.initProperty();
@@ -12,7 +21,9 @@ export default class Main extends cc.Component {
     start() { }
 
     private initProperty(): void {
-
+        this.loginNode.active = true;
+        this.userNode.active = true;
+        this.chatNode.active = true;
     }
 
     public getHeadByPid(pid: number): cc.SpriteFrame {

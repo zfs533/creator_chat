@@ -1,6 +1,7 @@
 export default class ServerConfig {
     public static port = 8089;
-    public static ip = "192.168.0.65";
+    public static ip = "0.0.0.0";
+    // public static ip = "192.168.0.197";
     public static remoteIp = "172.16.0.14";//"139.199.80.239";
     public static dbName = "chat";
     public static dbPort = 27017;

@@ -2,14 +2,15 @@ import DataViewUtils from "./dataviewUtils";
 import { Router } from "./routers";
 import { Head, ModelAny } from "./globalUtils";
 import EventManager from "../common/eventManager";
+import { getIp, IpType } from "./util";
 
 export default class ChatNet {
     private socket: WebSocket;
     private id: number = 0;
     private serverType: number = 0;
     init(cb?: any) {
-        // this.socket = new WebSocket("ws://192.168.0.65:8089/ws");
-        this.socket = new WebSocket("ws://139.199.80.239:8089/ws");//remote
+        let ip = getIp(IpType.remote);
+        this.socket = new WebSocket(ip);
         this.socket.binaryType = "arraybuffer";
         this.socket.onopen = () => {
             if (cb) {

@@ -1,3 +1,4 @@
+/* 老虎机转圈测试 */
 import LhjItem from "./lhjItem";
 
 const { ccclass, property } = cc._decorator;

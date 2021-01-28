@@ -1,5 +1,5 @@
 let Mongoose = require('mongoose');
-import { Schema, Model } from 'mongoose';
+import { Model, Schema } from 'mongoose';
 import MongodbUtil from '../mongodbUtil';
 import Logger from '../../utils/logger';
 
@@ -24,7 +24,7 @@ export default class ContentScheme {
         return this._instance;
     }
 
-    public model: Model;
+    public model: Model<any>;
     public async init(): Promise<any> {
         //_id:Number
         let contentSchema = new Schema({

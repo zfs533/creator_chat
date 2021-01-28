@@ -17,7 +17,7 @@ export interface FriendsModule {
 
 export default class FriendScheme {
     private static _instance: FriendScheme;
-    public model: Model;
+    public model: Model<any>;
     public static get Inst(): FriendScheme {
         if (!this._instance) {
             this._instance = new FriendScheme();

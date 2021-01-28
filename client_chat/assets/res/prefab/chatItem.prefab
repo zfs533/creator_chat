@@ -123,7 +123,7 @@
     },
     "_contentSize": {
       "__type__": "cc.Size",
-      "width": 350.2,
+      "width": 480,
       "height": 35
     },
     "_anchorPoint": {
@@ -135,7 +135,7 @@
       "__type__": "TypedArray",
       "ctor": "Float64Array",
       "array": [
-        204.881,
+        75,
         3,
         0,
         0,
@@ -187,8 +187,8 @@
     },
     "_contentSize": {
       "__type__": "cc.Size",
-      "width": 314,
-      "height": 27.72
+      "width": 441,
+      "height": 37.8
     },
     "_anchorPoint": {
       "__type__": "cc.Vec2",
@@ -199,8 +199,8 @@
       "__type__": "TypedArray",
       "ctor": "Float64Array",
       "array": [
-        326.269,
-        1.708,
+        453,
+        2,
         0,
         0,
         0,
@@ -240,8 +240,8 @@
     "_useOriginalSize": false,
     "_string": "交电费卡交电交交",
     "_N$string": "交电费卡交电交交",
-    "_fontSize": 22,
-    "_lineHeight": 22,
+    "_fontSize": 30,
+    "_lineHeight": 30,
     "_enableWrapText": true,
     "_N$file": null,
     "_isSystemFontUsed": true,
@@ -669,7 +669,7 @@
     },
     "_contentSize": {
       "__type__": "cc.Size",
-      "width": 350.2,
+      "width": 480,
       "height": 35
     },
     "_anchorPoint": {
@@ -681,7 +681,7 @@
       "__type__": "TypedArray",
       "ctor": "Float64Array",
       "array": [
-        74.396,
+        74,
         3,
         0,
         0,
@@ -733,8 +733,8 @@
     },
     "_contentSize": {
       "__type__": "cc.Size",
-      "width": 314,
-      "height": 27.72
+      "width": 441,
+      "height": 37.8
     },
     "_anchorPoint": {
       "__type__": "cc.Vec2",
@@ -745,8 +745,8 @@
       "__type__": "TypedArray",
       "ctor": "Float64Array",
       "array": [
-        28.328,
-        1.708,
+        28,
+        2,
         0,
         0,
         0,
@@ -786,8 +786,8 @@
     "_useOriginalSize": false,
     "_string": "交电费卡交电交",
     "_N$string": "交电费卡交电交",
-    "_fontSize": 22,
-    "_lineHeight": 22,
+    "_fontSize": 30,
+    "_lineHeight": 30,
     "_enableWrapText": true,
     "_N$file": null,
     "_isSystemFontUsed": true,

@@ -20,7 +20,7 @@ export default class Net {
     public async startServer() {
         /* 先连接数据库 */
         await MongodbUtil.Inst.init();
-        let ip = ServerConfig.getIp(ServerConfig.dev.remote);
+        let ip = ServerConfig.getIp(ServerConfig.dev.local);
         Logger.info(`start server ${ip} ${ServerConfig.port}`);
         this._server = new WS.Server({ host: ip, port: ServerConfig.port });
         this._server.on('open', () => { Logger.info('connected') });

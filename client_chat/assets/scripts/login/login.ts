@@ -24,9 +24,9 @@ export default class Login extends cc.Component {
     loading: Loading = null;
 
     onLoad() {
+        this.node.active = true;
         EventManager.Inst.registerEevent(Router.rut_login, this.resLogin.bind(this));
         EventManager.Inst.registerEevent(Router.rut_register, this.resRegister.bind(this));
-
     }
 
     start() {
