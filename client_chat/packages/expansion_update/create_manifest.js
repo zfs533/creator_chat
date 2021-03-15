@@ -21,6 +21,7 @@ module.exports = {
         manifest.version = updateVersion;
     },
     readDir(dir, obj) {
+        Editor.log(dir);
         var stat = fs.statSync(dir);
         if (!stat.isDirectory()) {
             return;
@@ -71,12 +72,12 @@ module.exports = {
         fs.writeFile(destManifest, JSON.stringify(manifest), (err) => {
             if (err) throw err;
             Editor.success('Manifest successfully generated');
-        });
-        // delete manifest.assets;
-        // delete manifest.searchPaths;
-        fs.writeFile(destVersion, JSON.stringify(manifest), (err) => {
-            if (err) throw err;
-            Editor.success('Version successfully generated');
+            delete manifest.assets;
+            delete manifest.searchPaths;
+            fs.writeFile(destVersion, JSON.stringify(manifest), (err) => {
+                if (err) throw err;
+                Editor.success('Version successfully generated');
+            });
         });
     }
 }

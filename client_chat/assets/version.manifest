@@ -1,6 +1,6 @@
 {
-    "packageUrl": "http://139.199.80.239:80/client/chat/update",
-    "remoteManifestUrl": "http://139.199.80.239:80/client/chat/update/project.manifest",
-    "remoteVersionUrl": "http://139.199.80.239:80/client/chat/update/version.manifest",
+    "packageUrl": "http://139.199.80.239:8099/",
+    "remoteManifestUrl": "http://139.199.80.239:8099/project.manifest",
+    "remoteVersionUrl": "http://139.199.80.239:8099/version.manifest",
     "version": "0.0.0"
 }

@@ -26,6 +26,8 @@ module.exports = {
          * @param {热更地址} filePath 
          */
         async startGenerate(event, updateVersion, updateUrl) {
+            Editor.log(updateVersion);
+            Editor.log(updateUrl);
             const fs = require('fs');
             /* 检测资源目录是否存在 */
             Editor.log(Editor.Project.path + "/build/jsb-default/res");

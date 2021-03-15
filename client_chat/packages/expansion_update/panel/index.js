@@ -10,7 +10,7 @@ Editor.Panel.extend({
             el: this.shadowRoot,
             data: {
                 /* 热更地址http://127.0.0.1:8091 */
-                updateUrl: "http://139.199.80.239:80/client/chat/update",
+                updateUrl: "http://139.199.80.239:8099/",
                 /* 版本号 */
                 updateVersion: "0.0.0",
             },

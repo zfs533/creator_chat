@@ -1,9 +1,12 @@
+import { tips } from "../common/tip";
+import Start from "./start";
+
 /**
  * 这个要加到main.js里面
  if (cc.sys.isNative) {
     var hotUpdateSearchPaths = cc.sys.localStorage.getItem("searchPaths");
     if (hotUpdateSearchPaths) {
-        jsb.fileUtils.setSearchPaths(JSON.stringify(hotUpdateSearchPaths));
+        jsb.fileUtils.setSearchPaths(JSON.parse(hotUpdateSearchPaths));
     }
 }
  */
@@ -15,17 +18,19 @@ export default class UpdateUtil {
     private updating: boolean = false;
 
     private updateManifest: cc.Asset = null;
+    private startSc: Start;
 
     /**
      * 初始化
      */
-    async init(): Promise<any> {
+    async init(start: Start): Promise<any> {
         cc.log("--init---")
+        this.startSc = start;
         return new Promise(resolve => {
-            if (this.am) {
-                resolve();
-                return;
-            }
+            // if (this.am) {
+            //     resolve();
+            //     return;
+            // }
             cc.log(cc.sys.os);
             cc.log(cc.sys.OS_ANDROID);
             cc.log(cc.sys.OS_IOS);
@@ -74,7 +79,6 @@ export default class UpdateUtil {
      */
     private async loadCustomManifest() {
         return new Promise(resolve => {
-            cc.log("loadcustom----------");
             cc.log("loadcustom----------1");
             cc.log(this.updateManifest)
             cc.log(this.updateManifest.nativeUrl);
@@ -97,14 +101,18 @@ export default class UpdateUtil {
         switch (event.getEventCode()) {
             case jsb.EventAssetsManager.ERROR_NO_LOCAL_MANIFEST:
                 cc.log("No local manifest file found, hot update skipped.");
+                tips.showTip("No local manifest file found,");
+                this.startSc.gotoChat();
                 break;
             case jsb.EventAssetsManager.ERROR_DOWNLOAD_MANIFEST:
             case jsb.EventAssetsManager.ERROR_PARSE_MANIFEST:
                 cc.log("Fail to download manifest file, hot update skipped.");
+                tips.showTip("Fail to download manifest file,");
+                this.startSc.gotoChat();
                 break;
             case jsb.EventAssetsManager.ALREADY_UP_TO_DATE:
                 cc.log("Already up to date with the latest remote version.");
-                cc.director.loadScene('chat');
+                this.startSc.gotoChat();
                 break;
             case jsb.EventAssetsManager.NEW_VERSION_FOUND:
                 cc.log('New version found, please try to update.');

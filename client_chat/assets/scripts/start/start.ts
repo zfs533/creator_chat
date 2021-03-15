@@ -20,12 +20,8 @@ export default class Start extends cc.Component {
         this.initProperty();
     }
     start() {
-        /* 链接游戏服务器 */
-        this.loading.showLoading();
-        Net.init(() => {
-            this.loading.hideLoading();
-            this.startUpdate();
-        });
+        this.startUpdate();
+        // this.gotoChat();
     }
 
     private initProperty(): void {
@@ -34,7 +30,12 @@ export default class Start extends cc.Component {
 
     gotoChat() {
         cc.log("gotoChat");
-        cc.director.loadScene('chat');
+        /* 链接游戏服务器 */
+        this.loading.showLoading();
+        Net.init(() => {
+            this.loading.hideLoading();
+            cc.director.loadScene('chat');
+        });
     }
 
     /**
@@ -43,7 +44,7 @@ export default class Start extends cc.Component {
     async startUpdate() {
         if (cc.sys.isNative) {
             this.updateNode.active = true;
-            await updateUtil.init();
+            await updateUtil.init(this);
             await updateUtil.startUpdateTask(this.updateManifest);
         }
         else {
