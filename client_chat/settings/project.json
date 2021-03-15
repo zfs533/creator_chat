@@ -1,5 +1,4 @@
 {
-  "start-scene": "75ecdbc6-1ce2-4916-8288-0df757c208e4",
   "group-list": [
     "default"
   ],
@@ -11,10 +10,10 @@
   "excluded-modules": [
     "3D Physics/Builtin"
   ],
-  "last-module-event-record-time": 1615809434288,
-  "design-resolution-width": 960,
-  "design-resolution-height": 640,
-  "fit-width": false,
+  "last-module-event-record-time": 1615814858008,
+  "design-resolution-width": 750,
+  "design-resolution-height": 1334,
+  "fit-width": true,
   "fit-height": true,
   "use-project-simulator-setting": false,
   "simulator-orientation": false,
@@ -33,5 +32,6 @@
     "live": {
       "enable": false
     }
-  }
+  },
+  "start-scene": "current"
 }

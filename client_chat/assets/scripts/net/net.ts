@@ -3,6 +3,7 @@ import { Router } from "./routers";
 import { Head, ModelAny } from "./globalUtils";
 import EventManager from "../common/eventManager";
 import { getIp, IpType } from "./util";
+import { tips } from "../common/tip";
 
 export default class ChatNet {
     private socket: WebSocket;

@@ -1,8 +1,7 @@
 {
   "engine": "cocos-creator-js",
   "packages": "packages",
-  "name": "simplechat",
-  "uuid": "bb312562-b2c1-4f39-a4a5-346d84c514fe",
-  "version": "2.3.2",
-  "id": "8410cce8-7dfd-4a9a-9025-bf1ee4a89ca2"
+  "name": "chattwo",
+  "id": "19320938-e935-440f-a8f1-f936637b581b",
+  "version": "2.3.0"
 }

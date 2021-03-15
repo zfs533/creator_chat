@@ -1,8 +1,10 @@
 {
-  "title": "client_chat",
+  "title": "chattwo",
   "packageName": "",
   "startScene": "75ecdbc6-1ce2-4916-8288-0df757c208e4",
-  "excludeScenes": [],
+  "excludeScenes": [
+    "2c4696f3-ad3b-4b03-9d8c-e24babe53226"
+  ],
   "includeSDKBox": false,
   "orientation": {
     "landscapeLeft": true,
@@ -14,10 +16,10 @@
   "inlineSpriteFrames": true,
   "inlineSpriteFrames_native": true,
   "mergeStartScene": false,
-  "optimizeHotUpdate": true,
+  "optimizeHotUpdate": false,
   "md5Cache": false,
   "encryptJs": true,
-  "xxteaKey": "d8103321-2c4f-4c",
+  "xxteaKey": "4417483c-f8d3-40",
   "zipCompressJs": true,
   "fb-instant-games": {},
   "android": {
