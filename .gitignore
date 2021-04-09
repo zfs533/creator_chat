@@ -3,3 +3,4 @@
 /server/.vscode
 /server/build
 /server/node_modules
+/httpResourceServer/.DS_Store

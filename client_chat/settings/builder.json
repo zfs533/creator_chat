@@ -1,5 +1,5 @@
 {
-  "title": "chattwo",
+  "title": "chattwo2",
   "packageName": "",
   "startScene": "75ecdbc6-1ce2-4916-8288-0df757c208e4",
   "excludeScenes": [
@@ -10,7 +10,7 @@
     "landscapeLeft": true,
     "landscapeRight": true,
     "portrait": true,
-    "upsideDown": false
+    "upsideDown": true
   },
   "webOrientation": "auto",
   "inlineSpriteFrames": true,
