@@ -161,62 +161,8 @@ var server = http.createServer(function (request, response) {
 
 });
 
-var port = 8000;
+var port = 8099;
 var urll = "192.168.0.113";
 server.listen(port, urll, function () {
     console.log('server listen on port %d', port);
 });
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-// var express = require('express')
-// var expressWs = require('express-ws')
-
-// var app = express()
-// expressWs(app)
-
-// app.ws('/echo', (ws, req) => {
-
-//     ws.on('connection', function (connection) {
-//         //...
-//     })
-
-//     ws.on('close', function () {
-//         //...
-//     })
-// })
-
-// app.use(express.static('public'))
-// app.listen(3000, "192.168.0.113", function () {
-//     console.log('Example app listening on port 3000!')
-// });
