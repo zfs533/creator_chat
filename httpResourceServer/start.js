@@ -63,9 +63,7 @@ var server = http.createServer(function (request, response) {
 
     var pathname = url.parse(querystring.unescape(request.url)).pathname;
 
-    var realPath = path.join("static", pathname);
-
-
+    var realPath = path.join("../zfsres/", pathname);
 
     fs.exists(realPath, function (exists) {
 
@@ -162,7 +160,7 @@ var server = http.createServer(function (request, response) {
 });
 
 var port = 8099;
-var urll = "192.168.0.113";
-server.listen(port, urll, function () {
+var urll = "localhost";
+server.listen(port, function () {
     console.log('server listen on port %d', port);
 });
