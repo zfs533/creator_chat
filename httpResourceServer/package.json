@@ -9,7 +9,7 @@
   "author": "xsd",
   "license": "ISC",
   "dependencies": {
-    "express": "^4.17.1",
+    "express": "^4.17.3",
     "express-ws": "^4.0.0",
     "fs": "0.0.1-security",
     "http": "0.0.0",
